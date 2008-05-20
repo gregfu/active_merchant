@@ -81,6 +81,15 @@ module ActiveMerchant #:nodoc:
           raise Error, UNSTORE_ERROR_MESSAGE
         end
       end
+
+      def void(authorization, options)
+        case authorization
+        when AUTHORIZATION
+          Response.new(true, SUCCESS_MESSAGE, {}, :test => true)
+        else
+          Response.new(false, FAILURE_MESSAGE, {:error => FAILURE_MESSAGE },:test => true)
+        end
+      end
     end
   end
 end
