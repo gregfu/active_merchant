@@ -1,5 +1,10 @@
 = ActiveMerchant CHANGELOG
 
+* Get SageGateway working with real test account. Improve test suite. [cody]
+* Unify TrustCommerce, Payment Express, and Braintree CC storage [benjamin.curtis]
+* Update to use new Payflow Pro URLs [cody]
+* Fix missing Content-Type header for Ruby 1.8.4 [cody]
+* Fix Authorize.Net CIM response.message [patrick.t.joyce]
 * Add JCB and Diners Club as supported cards to SageGateway [cody]
 * Add CA country code to Sage gateway's supported countries [cody]
 * Add support for Sage Payment Solutions gateway [cody]
