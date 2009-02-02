@@ -6,7 +6,7 @@ module ActiveMerchant #:nodoc:
       URL = 'https://secure.braintreepaymentgateway.com/api/transact.php'
     
       self.supported_countries = ['US']
-      self.supported_cardtypes = [:visa, :master, :american_express]
+      self.supported_cardtypes = [:visa, :master, :american_express, :discover]
       self.homepage_url = 'http://www.braintreepaymentsolutions.com'
       self.display_name = 'Braintree'
 
@@ -22,11 +22,11 @@ module ActiveMerchant #:nodoc:
       # Pass :store => some_number_or_string to specify the
       # customer_vault_id BrainTree should use (make sure it's
       # unique).
-      def authorize(money, creditcard, options = {})
+      def authorize(money, payment_source, options = {})
         post = {}
         add_invoice(post, options)
-        add_payment_source(post, creditcard,options)        
-        add_address(post, creditcard, options)        
+        add_payment_source(post, payment_source, options)        
+        add_address(post, payment_source, options)        
         add_customer_data(post, options)
         
         commit('auth', money, post)
@@ -77,9 +77,17 @@ module ActiveMerchant #:nodoc:
     
       # To match the other stored-value gateways, like TrustCommerce,
       # store and unstore need to be defined
-      def store(creditcard, options = {})
+      def store(payment_source, options = {})
         billing_id = options.delete(:billing_id).to_s || true
-        authorize(100, creditcard, options.merge(:store => billing_id))
+        post = {}
+        post[:customer_vault] = 'add_customer'
+        if billing_id
+          post[:customer_vault_id] = billing_id
+        end
+        add_payment_source(post, payment_source, options)
+        add_address(post, payment_source, options)
+        add_customer_data(post, options)
+        commit(nil,nil, post)
       end
       
       alias_method :unstore, :delete

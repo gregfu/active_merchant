@@ -64,6 +64,10 @@ linkpoint:
   pem: |--
     PASTE YOUR PEM FILE HERE
 
+modern_payments:
+  login: login
+  password: password
+  
 # Working credentials, no need to replace
 moneris:
   login: store1
@@ -168,7 +172,23 @@ psl_visa_address:
   address2: 
   address3: 
   city: 
-  zip: 
+  zip:
+    
+psl_visa_debit:
+  first_name:
+  last_name:
+  number:
+  month:
+  year:
+  verification_value:
+
+psl_visa_debit_address:
+  address1:
+  address2:
+  address3:
+  city:
+  state:
+  zip:
 
 quickpay:
   login: X
@@ -289,3 +309,9 @@ viaklix:
   login: LOGIN
   password: PASSWORD
   user: USER
+  
+# Working test credentials, no need to replace
+wirecard:
+  login: 56500
+  password: TestXAPTER
+  

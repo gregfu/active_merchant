@@ -1,5 +1,48 @@
 = ActiveMerchant CHANGELOG
 
+* Fix PSL gateway capturing [cody]
+* Fix failed Visa debit purchases with PSL gateway start date info is present [cody]
+* Support personal fixtures file on Windows [cody]
+* Clearer variable naming for BraintreeGateway#authorize [Jonathan S. Katz]
+* Fix brittle Authorize.net tests [cody]
+* Add support for Authorize.net duplicate window [Seamus Abshere]
+* Return transaction id for PayPal refunds [jxtps435]
+* Allow storage of e-checks with BraintreeGateway [jimiray]
+* Add test URL to PayJunction gateway [boomtowndesigngroup]
+* More robust parsing for Wirecard gateway [Soleone]
+* Pass the issue number to CardStream verbatim and update test card numbers [Soleone]
+
+== Version 1.4.1 (December 9, 2008)
+
+* Update CardStream URL. Note that you will also need to update your login id. [cody]
+
+== Version 1.4.0 (November 27, 2008)
+
+* Return failed authorization when SkipJack purchase fails [Tron, cody]
+* Update README [cody]
+* Add metadata to Authorize.net CIM gateway [cody]
+* Make ActionViewHelper compatible with changes to concat method in ActionPack [cody]
+* Remove PayPal and Payflow Name-Value gateways. PayPal is no longer terminating the Payflow XML API. [cody]
+* Don't directly use the inflector in the action view helper [cody]
+* Work around Rails Inflector change [cody]
+* Add configurable timeouts to PostsData [Michael Koziarski]
+* Add valid_sender? method to gateway integrations [Soleone]
+* Fix PayPal error parsing [cody]
+* Fix MIT-LICENSE [cody]
+* Add a payment gateway for Website Payments Pro Canada [cody]
+* Fix shipping amount option in Sage gateway [Darrick Wiebe]
+* Improved message and error message handling [Soleone]
+* Get Wirecard working in the Live environment [Soleone]
+* Remove dead code in PayPal Common API files [cody]
+* Use the PayPal short error message if the long message is empty [cody]
+* Fix unit tests when being run by Cruise Control [cody]
+* Add support for PayPal Fraud Review Response [cody]
+* Add testing support for German Wirecard Gateway [Soleone]
+* Specify required version of ActiveSupport [cody]
+* Make ssl_strict a superclass_delegating_accessor so the entire application's validation of SSL certs can be disabled in the event of certificate problem. [cody]
+* Make Gateway.application_id a superclass_delegating_accessor so it can be set from outside the subclass definition [cody]
+* Add Discover to the list of supported card types for Braintree [cody]
+* Add support for Modern Payments gateway [Jeremy Nicoll, cody]
 * Add support for EFT/ACH and Interac Online to the BeanstreamGateway [cody]
 * Document the SageGateway [cody]
 * Add support for echecks with SageGateway. [cody]

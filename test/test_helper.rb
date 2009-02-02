@@ -18,11 +18,7 @@ require 'digest/md5'
 require File.dirname(__FILE__) + '/../lib/active_merchant'
 
 begin
-  if respond_to? :gem
-    gem 'actionpack'
-  else
-    require_gem 'actionpack'
-  end
+  gem 'actionpack'
 rescue LoadError
   raise StandardError, "The view tests need ActionPack installed as gem to run"
 end
@@ -32,6 +28,14 @@ require 'action_controller/test_process'
 require 'active_merchant/billing/integrations/action_view_helper'
 
 ActiveMerchant::Billing::Base.mode = :test
+
+# Test gateways
+class SimpleTestGateway < ActiveMerchant::Billing::Gateway
+end
+
+class SubclassGateway < SimpleTestGateway
+end
+
 
 module ActiveMerchant
   module Assertions
@@ -108,8 +112,9 @@ end
 module Test
   module Unit
     class TestCase
-      LOCAL_CREDENTIALS = ENV['HOME'] + '/.active_merchant/fixtures.yml' unless defined?(LOCAL_CREDENTIALS)
-      DEFAULT_CREDENTIALS = File.dirname(__FILE__) + '/fixtures.yml' unless defined?(DEFAULT_CREDENTIALS)
+      HOME_DIR = RUBY_PLATFORM =~ /mswin32/ ? ENV['HOMEPATH'] : ENV['HOME'] unless defined?(HOME_DIR)
+      LOCAL_CREDENTIALS = File.join(HOME_DIR.to_s, '.active_merchant/fixtures.yml') unless defined?(LOCAL_CREDENTIALS)
+      DEFAULT_CREDENTIALS = File.join(File.dirname(__FILE__), 'fixtures.yml') unless defined?(DEFAULT_CREDENTIALS)
       
       include ActiveMerchant::Billing
       include ActiveMerchant::Assertions
